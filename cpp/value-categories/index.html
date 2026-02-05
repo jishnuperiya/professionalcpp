@@ -8,21 +8,28 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#">
+<meta name="description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#What does it really calling something a value type in C&#43;&#43;?
+A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:
+x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(x) // pass by value (copy ctor) if(x){} // truth test - implicit conversion to bool x&#43;y // arithmetic x &#43;=y // compound assignment x&#43;&#43; // mutation (postfix operator) These operations define what value type means in practice. This is the baseline
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://jishnuperiya.github.io/professionalcpp/cpp/value-categories/">
   <meta property="og:site_name" content="Professional C&#43;&#43;">
   <meta property="og:title" content="Value Type">
-  <meta property="og:description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#">
+  <meta property="og:description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#What does it really calling something a value type in C&#43;&#43;?
+A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:
+x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(x) // pass by value (copy ctor) if(x){} // truth test - implicit conversion to bool x&#43;y // arithmetic x &#43;=y // compound assignment x&#43;&#43; // mutation (postfix operator) These operations define what value type means in practice. This is the baseline">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="cpp">
 
 
   <meta itemprop="name" content="Value Type">
-  <meta itemprop="description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#">
-  <meta itemprop="wordCount" content="11">
+  <meta itemprop="description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#What does it really calling something a value type in C&#43;&#43;?
+A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:
+x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(x) // pass by value (copy ctor) if(x){} // truth test - implicit conversion to bool x&#43;y // arithmetic x &#43;=y // compound assignment x&#43;&#43; // mutation (postfix operator) These operations define what value type means in practice. This is the baseline">
+  <meta itemprop="wordCount" content="362">
 
 <title>Value Type | Professional C&#43;&#43;</title>
 <link rel="icon" href="/professionalcpp/favicon.png" >
@@ -32,7 +39,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/professionalcpp/fuse.min.js"></script>
-  <script defer src="/professionalcpp/en.search.min.1a0130bf508cb4aef62990dce708e6997c8530085ee77e4d333a1fb1d9ced69d.js" integrity="sha256-GgEwv1CMtK72KZDc5wjmmXyFMAhe535NMzofsdnO1p0=" crossorigin="anonymous"></script>
+  <script defer src="/professionalcpp/en.search.min.e6598a4308fca64ffd41bd2016fe045af8b426b5679a79aa8d2d5d8792ad2fa2.js" integrity="sha256-5lmKQwj8pk/9Qb0gFv4EWvi0JrVnmnmqjS1dh5KtL6I=" crossorigin="anonymous"></script>
 
 
 
@@ -131,10 +138,33 @@ https://github.com/alex-shpak/hugo-book
 
   <label for="toc-control">
     
+    <img src="/professionalcpp/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
   </label>
 </div>
 
 
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-user-defined-type">A User-Defined Type</a>
+      <ul>
+        <li><a href="#where-value-semantics-are-missing">where value semantics are missing?</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#what-we-must-do-to-create-value-type">what we must do to create value type:</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
   
  
       </header>
@@ -142,6 +172,56 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown book-article"><h1 id="what-does-it-mean-to-be-a-value-type-in-c">What Does It Mean to Be a Value Type in C++?<a class="anchor" href="#what-does-it-mean-to-be-a-value-type-in-c">#</a></h1>
+<p>What does it really calling something a value type in C++?</p>
+<p>A value type behave like int or double. Lets take int as a reference point.
+With int, a wide range of of operations work by default:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> y  <span style="color:#75715e">//assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> x; <span style="color:#75715e">// copy constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x<span style="color:#f92672">==</span>y <span style="color:#75715e">// comparison
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>do_nothing(x) <span style="color:#75715e">// pass by value (copy ctor)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(x){}  <span style="color:#75715e">// truth test - implicit conversion to bool
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x<span style="color:#f92672">+</span>y  <span style="color:#75715e">// arithmetic
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x <span style="color:#f92672">+=</span>y <span style="color:#75715e">// compound assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x<span style="color:#f92672">++</span>  <span style="color:#75715e">// mutation (postfix operator)
+</span></span></span></code></pre></div><p>These operations define what value type means in practice. This is the baseline</p>
+<h2 id="a-user-defined-type">A User-Defined Type<a class="anchor" href="#a-user-defined-type">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">complex</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> real;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> imaginary;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div><p>some operations still work:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>complex x <span style="color:#f92672">=</span> y; <span style="color:#75715e">// copy assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x <span style="color:#f92672">=</span> y <span style="color:#75715e">// assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>do_nothing(x)   <span style="color:#75715e">//copy ctor 
+</span></span></span></code></pre></div><p>these work because the compiler generates the <strong>special member functions</strong> automatically. Copy construction and copy assignment are provided member wise. but this is where the similarity to int ends</p>
+<h3 id="where-value-semantics-are-missing">where value semantics are missing?<a class="anchor" href="#where-value-semantics-are-missing">#</a></h3>
+<p>the following operations will fail:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>x <span style="color:#f92672">==</span> y <span style="color:#75715e">// equality operator
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(x)  <span style="color:#75715e">// -&gt; check this later which operator is it actully uses
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x<span style="color:#f92672">+</span> y  <span style="color:#75715e">// no arithmetic
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>x<span style="color:#f92672">+=</span>y  <span style="color:#75715e">// no compound operations
+</span></span></span></code></pre></div><p>The compoiler does invent meaning for these operations.</p>
+<h1 id="what-a-value-types-is">What a value types is<a class="anchor" href="#what-a-value-types-is">#</a></h1>
+<p>It is a type whose operations define its meaning:</p>
+<ul>
+<li>what does equality mean</li>
+<li>what does addition mean</li>
+<li>is the type meaningful in boolean context?</li>
+<li>can it be modified destructively? (eg: x+=y)</li>
+</ul>
+<p>Built in types comes with these answers pre-defined</p>
+<p>User-defined types do not.</p>
+<hr>
+<h1 id="summary">Summary<a class="anchor" href="#summary">#</a></h1>
+<h2 id="what-we-must-do-to-create-value-type">what we must do to create value type:<a class="anchor" href="#what-we-must-do-to-create-value-type">#</a></h2>
+<ul>
+<li>When possible, value types should rely on compiler-generated special member functions (Rule of Zero), but value semantics do not depend on it (if the type own a resource: you must <strong>decide and define</strong> what copy means ans werite copy and assignment yourself)</li>
+<li>Explicitly define equality (<code>operator==</code>) if comparison makes sense</li>
+<li>Define arithmetic operators if the type participates in expressions</li>
+<li>Define compound operators for destructive updates</li>
+<li>Avoid hidden ownership or shared state</li>
+</ul>
+<p><strong>A user-defined type can be copied and assigned by default because the compiler generates special member functions, but all higher-level value semantics must be explicitly defined.</strong></p>
 </article>
  
       
@@ -193,6 +273,29 @@ https://github.com/alex-shpak/hugo-book
     </div>
 
     
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-user-defined-type">A User-Defined Type</a>
+      <ul>
+        <li><a href="#where-value-semantics-are-missing">where value semantics are missing?</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#what-we-must-do-to-create-value-type">what we must do to create value type:</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
   
  
   </main>

@@ -6,8 +6,14 @@
     <description>Recent content in Home on Professional C&#43;&#43;</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://jishnuperiya.github.io/professionalcpp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Publishing articles using hugo</title>
+      <link>https://jishnuperiya.github.io/professionalcpp/cpp/deploy-hugo-github-pages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://jishnuperiya.github.io/professionalcpp/cpp/deploy-hugo-github-pages/</guid>
+      <description>&lt;p&gt;I wanted a lightweight way to publish technical notes and design decisions without dealing with servers, frameworks, or ongoing maintenance.&lt;br&gt;&#xA;Hugo + GitHub Pages turned out to be the simplest and most robust solution.&lt;/p&gt;&#xA;&lt;p&gt;This post documents the exact steps I used to deploy this blog.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;project-structure&#34;&gt;Project Structure&lt;a class=&#34;anchor&#34; href=&#34;#project-structure&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;After creating a Hugo site, the directory layout looks roughly like this:&lt;/p&gt;&#xA;&lt;p&gt;professionalcpp/&#xA;├── content/&#xA;├── themes/&#xA;├── static/&#xA;├── hugo.toml&#xA;└── public/ # generated output (do not edit manually)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Value Type</title>
       <link>https://jishnuperiya.github.io/professionalcpp/cpp/value-categories/</link>

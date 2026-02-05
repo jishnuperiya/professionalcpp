@@ -1,0 +1,1 @@
+[{"id":0,"href":"/cpp/","title":"Cpp","section":"Professional C++","content":"C++#\rWelcome to the C++ section.\n"},{"id":1,"href":"/cpp/value-categories/","title":"Value Categories","section":"Cpp","content":"Value Categories in C++#\rIn C++, an lvalue refers to an object with a persistent location…\nint x = 10; int\\\u0026amp; r = x;"}]

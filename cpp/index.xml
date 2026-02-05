@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on Professional C&#43;&#43;</title>
+    <link>//localhost:1313/cpp/</link>
+    <description>Recent content in C&#43;&#43; on Professional C&#43;&#43;</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="//localhost:1313/cpp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Value Categories</title>
+      <link>//localhost:1313/cpp/value-categories/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/cpp/value-categories/</guid>
+      <description>&lt;h1 id=&#34;value-categories&#34;&gt;Value Categories&lt;a class=&#34;anchor&#34; href=&#34;#value-categories&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;Your content&amp;hellip;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

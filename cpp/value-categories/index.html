@@ -9,8 +9,8 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#What does it really calling something a value type in C&#43;&#43;?
+(hint: Value semantics means that when you copy a variable, you get an independent copy of the data, not a reference or pointer to the original.)
 A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:
-x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(x) // pass by value (copy ctor) if(x){} // truth test - implicit conversion to bool x&#43;y // arithmetic x &#43;=y // compound assignment x&#43;&#43; // mutation (postfix operator) These operations define what value type means in practice. This is the baseline
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
@@ -18,8 +18,8 @@ x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(
   <meta property="og:site_name" content="Professional C&#43;&#43;">
   <meta property="og:title" content="Value Type">
   <meta property="og:description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#What does it really calling something a value type in C&#43;&#43;?
-A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:
-x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(x) // pass by value (copy ctor) if(x){} // truth test - implicit conversion to bool x&#43;y // arithmetic x &#43;=y // compound assignment x&#43;&#43; // mutation (postfix operator) These operations define what value type means in practice. This is the baseline">
+(hint: Value semantics means that when you copy a variable, you get an independent copy of the data, not a reference or pointer to the original.)
+A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="cpp">
@@ -27,9 +27,9 @@ x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(
 
   <meta itemprop="name" content="Value Type">
   <meta itemprop="description" content="What Does It Mean to Be a Value Type in C&#43;&#43;?#What does it really calling something a value type in C&#43;&#43;?
-A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:
-x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(x) // pass by value (copy ctor) if(x){} // truth test - implicit conversion to bool x&#43;y // arithmetic x &#43;=y // compound assignment x&#43;&#43; // mutation (postfix operator) These operations define what value type means in practice. This is the baseline">
-  <meta itemprop="wordCount" content="362">
+(hint: Value semantics means that when you copy a variable, you get an independent copy of the data, not a reference or pointer to the original.)
+A value type behave like int or double. Lets take int as a reference point. With int, a wide range of of operations work by default:">
+  <meta itemprop="wordCount" content="672">
 
 <title>Value Type | Professional C&#43;&#43;</title>
 <link rel="icon" href="/professionalcpp/favicon.png" >
@@ -39,7 +39,7 @@ x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(
 
 
   <script defer src="/professionalcpp/fuse.min.js"></script>
-  <script defer src="/professionalcpp/en.search.min.1e2dbe10d299b0d85a46afa5fa32a82941720efd9e751b94f5ada6c1ad15ec5a.js" integrity="sha256-Hi2&#43;ENKZsNhaRq&#43;l&#43;jKoKUFyDv2edRuU9a2mwa0V7Fo=" crossorigin="anonymous"></script>
+  <script defer src="/professionalcpp/en.search.min.7c85f9b2022e85691b3a2f28630390c28b1afd53fa289a7139889b0e71e996b5.js" integrity="sha256-fIX5sgIuhWkbOi8oYwOQwosa/VP6KJpxOYibDnHplrU=" crossorigin="anonymous"></script>
 
 
 
@@ -174,6 +174,16 @@ x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(
   <ul>
     <li><a href="#what-we-must-do-to-create-value-type">what we must do to create value type:</a></li>
   </ul>
+
+  <ul>
+    <li><a href="#q1">Q1</a></li>
+    <li><a href="#q2">Q2</a></li>
+    <li><a href="#q3">Q3</a></li>
+    <li><a href="#q4">Q4</a></li>
+    <li><a href="#q5">Q5</a></li>
+    <li><a href="#q6">Q6</a></li>
+    <li><a href="#answers">Answers</a></li>
+  </ul>
 </nav>
 
 
@@ -187,6 +197,7 @@ x = y //assignment int z = x; // copy constructor x==y // comparison do_nothing(
       
   <article class="markdown book-article"><h1 id="what-does-it-mean-to-be-a-value-type-in-c">What Does It Mean to Be a Value Type in C++?<a class="anchor" href="#what-does-it-mean-to-be-a-value-type-in-c">#</a></h1>
 <p>What does it really calling something a value type in C++?</p>
+<p>(hint: <strong>Value semantics</strong> means that when you copy a variable, you get an <strong>independent copy</strong> of the data, not a reference or pointer to the original.)</p>
 <p>A value type behave like int or double. Lets take int as a reference point.
 With int, a wide range of of operations work by default:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> y  <span style="color:#75715e">//assignment
@@ -236,6 +247,70 @@ With int, a wide range of of operations work by default:</p>
 <li>Avoid hidden ownership or shared state</li>
 </ul>
 <p><strong>A user-defined type can be copied and assigned by default because the compiler generates special member functions, but all higher-level value semantics must be explicitly defined.</strong></p>
+<hr>
+<h1 id="self-check-value-types-in-c">Self-Check: Value Types in C++<a class="anchor" href="#self-check-value-types-in-c">#</a></h1>
+<h2 id="q1">Q1<a class="anchor" href="#q1">#</a></h2>
+<p>Why does this compile?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">complex</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> real;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> imaginary;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>complex a;
+</span></span><span style="display:flex;"><span>complex b <span style="color:#f92672">=</span> a;</span></span></code></pre></div><ul>
+<li>A) Because <code>complex</code> is a value type</li>
+<li>B) Because the compiler generates special member functions</li>
+<li>C) Because <code>int</code> is copyable</li>
+<li>D) Because <code>struct</code> implies deep copy</li>
+</ul>
+<h2 id="q2">Q2<a class="anchor" href="#q2">#</a></h2>
+<p>Which of the following do not work for <code>complex</code> as defined above?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>complex x, y;</span></span></code></pre></div><ul>
+<li>A) <code>x = y;</code></li>
+<li>B) <code>complex z = x;</code></li>
+<li>C) <code>x == y;</code></li>
+<li>D) <code>do_nothing(x);</code></li>
+</ul>
+<h2 id="q3">Q3<a class="anchor" href="#q3">#</a></h2>
+<p>Why does this fail?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (x) { }</span></span></code></pre></div><ul>
+<li>A) <code>complex</code> has no data</li>
+<li>B) <code>complex</code> has no implicit conversion to <code>bool</code></li>
+<li>C) <code>struct</code> types cannot be used in conditions</li>
+<li>D) The compiler disables this for safety</li>
+</ul>
+<h2 id="q4">Q4<a class="anchor" href="#q4">#</a></h2>
+<p>What is the minimum requirement for a type to be considered a value type?</p>
+<ul>
+<li>A) It must follow the Rule of Zero</li>
+<li>B) It must be trivially copyable</li>
+<li>C) Copying must produce an independent value</li>
+<li>D) It must support arithmetic operators</li>
+</ul>
+<h2 id="q5">Q5<a class="anchor" href="#q5">#</a></h2>
+<p>If a type directly owns a resource (e.g. raw memory) and is meant to be copyable, what must you do?</p>
+<ul>
+<li>A) Nothing — the compiler handles it</li>
+<li>B) Disable copying</li>
+<li>C) Define copy semantics explicitly</li>
+<li>D) Use <code>std::shared_ptr</code></li>
+</ul>
+<h2 id="q6">Q6<a class="anchor" href="#q6">#</a></h2>
+<p>Which of these are value types?</p>
+<ul>
+<li>A) <code>std::vector&lt;int&gt;</code></li>
+<li>B) <code>std::ostream</code></li>
+<li>C) <code>std::string</code></li>
+<li>D) <code>std::unique_ptr&lt;int&gt;</code></li>
+</ul>
+<h2 id="answers">Answers<a class="anchor" href="#answers">#</a></h2>
+<p><strong>Q1:</strong> B → Copying works because the compiler generates special member functions.</p>
+<p><strong>Q2:</strong> C → <code>operator==</code> is not defined.</p>
+<p><strong>Q3:</strong> B → No implicit conversion to <code>bool</code>.</p>
+<p><strong>Q4:</strong> C → Value semantics are about what copying means.</p>
+<p><strong>Q5:</strong> C → Owning a resource forces you to define copy behavior (or forbid it).</p>
+<p><strong>Q6:</strong> A, C → <code>std::vector</code> and <code>std::string</code> are value types.</p>
+<p>Refer: <a href="https://isocpp.org/wiki/faq/value-vs-ref-semantics#val-vs-ref-semantics">Reference and Value Semantics, C++ FAQ</a></p>
 </article>
  
       
@@ -317,6 +392,16 @@ With int, a wide range of of operations work by default:</p>
 
   <ul>
     <li><a href="#what-we-must-do-to-create-value-type">what we must do to create value type:</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#q1">Q1</a></li>
+    <li><a href="#q2">Q2</a></li>
+    <li><a href="#q3">Q3</a></li>
+    <li><a href="#q4">Q4</a></li>
+    <li><a href="#q5">Q5</a></li>
+    <li><a href="#q6">Q6</a></li>
+    <li><a href="#answers">Answers</a></li>
   </ul>
 </nav>
 
